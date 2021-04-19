@@ -9,6 +9,8 @@ public class NoteCupApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(NoteCupApplication.class, args);
 		System.out.println("hello world");
+		
+		System.out.println("kimsimok hihi");
 	}
 
 }
