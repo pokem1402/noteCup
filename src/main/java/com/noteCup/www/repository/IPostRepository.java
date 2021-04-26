@@ -11,5 +11,6 @@ public interface IPostRepository extends JpaRepository<ContentPost, Long> {
 
 	void deleteByCid(Object object);
 
+	ContentPost findByCid(Object object);
 
 }

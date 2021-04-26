@@ -46,6 +46,15 @@ public class ContentsController {
 		return "index";
 	}
 	
+	@GetMapping("/view/item")
+	public String contentFrm(WebRequest request, Model model, HttpSession ss) {
+		Map<Object,Object> hm = new HashMap<Object,Object>();  
+		hm.put( "cid", Integer.parseInt(request.getParameter("cid"))  );
+		hm.put( "ctype", request.getParameter("ctype"));
+		model.addAttribute("contentHtml", cm.read(hm));
+		return "contentFrm";
+	}
+	
 	
 	
 	@PostMapping("/edit/delete")

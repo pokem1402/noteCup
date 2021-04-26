@@ -17,7 +17,7 @@
 		<!--	cno : <input type="text" th:field="*{cno}"/> <br/>-->
 
 		양식 : <select id="selector" th:field="*{contentType}">
-			<option th:each="contentType : ${T(com.example.demo.model.ContentType).values()}"
+			<option th:each="contentType : ${T(com.noteCup.www.model.ContentType).values()}"
 					th:value="${contentType.name()}"
 					th:text="${contentType.name()}"></option>  
 		</select>

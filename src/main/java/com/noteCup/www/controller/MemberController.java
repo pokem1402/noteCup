@@ -42,29 +42,29 @@ public class MemberController {
 		return "index";
 	}
 
+	
 	@GetMapping("/auth/login")
 	public String signInFrm(WebRequest request, Model model) {
 		MemberInput md = new MemberInput();
 		model.addAttribute("user", md);
-		
+		System.out.println(":::::::::.............." + md.getMid() + md.getMpwd() );
 		return "loginFrm";
 	}
 	
 	@PostMapping("/auth/login")
 	public String signIn(@ModelAttribute("user") MemberInput mi, Model model, HttpSession httpsession) {
+		System.out.println(":::::::::.............." + mi.getMid() + mi.getMpwd() );
+		
 		boolean check = mm.signIn(mi);
-		
-		
+	
 		if(check) { 
 			model.addAttribute("user", mi);
 			httpsession.setAttribute("id", mi.getMid() );
-			
 			
 			return "redirect:/";
 		}
 		return "loginFrm";
 	}
-	
 	
 	@GetMapping("/auth/logout")
 	public String logOut(Model model, HttpSession httpsession) {

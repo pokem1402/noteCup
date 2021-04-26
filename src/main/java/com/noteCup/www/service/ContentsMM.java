@@ -91,12 +91,55 @@ public class ContentsMM {
 			//@formatter:on
 			break;
 		case "script":
-			//@formatter:off
+			//@formatter:offs
 			sdao.deleteByCid(hm.get("cid"));
 			//@formatter:on
 			break;
 		}
 		
 	}
+
+	public String read(Map<Object, Object> hm) {
+		String result = "";
+		System.out.println("RULISTsJHERSKTJE???????");
+		switch ( hm.get("ctype").toString() ) {
+
+		case "post":
+			//@formatter:off
+			System.out.println("RULISTJHERSKTJE???????");
+			ContentPost cp = new ContentPost();
+			cp = cdao.findByCid(hm.get("cid"));
+			result = makeHtml(cp);
+			//@formatter:on
+			break;
+		case "script":
+			//@formatter:off
+			ContentScript cs  = new ContentScript();
+			cs = sdao.findByCid(hm.get("cid"));
+			result = makeHtml(cs);
+			//@formatter:on
+			break;
+		}
+
+		return result;
+	}
+	
+	
+	public String makeHtml(ContentPost cp) {
+		StringBuilder sb = new StringBuilder();
+		/*~~~~*/
+		sb.append("<input type='text'>");
+		//sb.append(cp.getCtitle());
+		//sb.append(cp.getCtext());
+		sb.append("</input>");		
+		return sb.toString();
+	}
+	
+	public String makeHtml(ContentScript cs) {
+		StringBuilder sb = new StringBuilder();
+		/*~~~~*/
+		return sb.toString();
+	}
+
 
 }

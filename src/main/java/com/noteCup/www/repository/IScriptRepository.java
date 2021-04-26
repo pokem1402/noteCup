@@ -9,4 +9,6 @@ public interface IScriptRepository extends JpaRepository<ContentScript, Long> {
 
 	void deleteByCid(Object object);
 
+	ContentScript findByCid(Object object);
+
 }
