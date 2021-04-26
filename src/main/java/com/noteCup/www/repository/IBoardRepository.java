@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.noteCup.www.model.Board;
 
 @Repository
-public interface BoardRepository extends JpaRepository<Board, Long> {
+public interface IBoardRepository extends JpaRepository<Board, Long> {
 
 }

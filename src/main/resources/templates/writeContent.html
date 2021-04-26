@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>writeFrm</title>
+	<!--<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+	<script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+	<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>-->
+</head>
+
+<body style="text-align: center">
+
+	<h1>noteCup index</h1>
+
+	<form action="/content/edit/write" th:object="${content}" method="POST" enctype="utf8">
+		<!--	cno : <input type="text" th:field="*{cno}"/> <br/>-->
+
+		양식 : <select id="selector" th:field="*{contentType}">
+			<option th:each="contentType : ${T(com.example.demo.model.ContentType).values()}"
+					th:value="${contentType.name()}"
+					th:text="${contentType.name()}"></option>  
+		</select>
+		<div id="title">
+			제목 : <input type="text" th:field="*{title}" /> <br />
+		</div>
+		<div id="text">
+			내용 : <input type="text" th:field="*{text}" /> <br />
+		</div>
+		<input type="submit" value="글 작성" />
+	</form>
+
+	<script th:inline="javascript">
+
+		$(function () {
+			$("#selector").change(function () {
+				switch ($(this).val()) {
+
+					case "POST":
+						$("div#title").css("display", "block");
+						break;
+					case "SCRIPT":
+						$("div#title").css("display", "none");
+						break;
+				}
+			});
+		});
+
+
+
+
+	</script>
+
+</body>
+
+</html>

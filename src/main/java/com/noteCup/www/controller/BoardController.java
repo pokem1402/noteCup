@@ -1,4 +1,4 @@
-package com.noteCup.www;
+package com.noteCup.www.controller;
 
 import java.util.List;
 
@@ -10,14 +10,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.noteCup.www.model.Board;
-import com.noteCup.www.repository.BoardRepository;
+import com.noteCup.www.repository.IBoardRepository;
 
 @Controller
 @RequestMapping("/board")
 public class BoardController {
 
 	@Autowired
-	BoardRepository boardRepository;
+	IBoardRepository boardRepository;
 	
 	@GetMapping("/list")
 	public String list(Model model) {

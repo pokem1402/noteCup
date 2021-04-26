@@ -1,0 +1,49 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>joinFrm</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+</head>
+<body>
+<h1>회원가입</h1>
+<form action="/member/auth/join" th:object="${user}" method="POST" enctype="utf8">
+  
+    <div>
+        <label>id</label>
+        <input type="text" th:field="*{mid}"/>
+        <p th:each="error : ${#fields.errors('mid')}" 
+          th:text="${error}">Validation error</p>
+    </div>
+    
+    <div>
+        <label>email</label>
+        <input type="email" th:field="*{memail}"/>
+        <p th:each="error : ${#fields.errors('memail')}" 
+          th:text="${error}">Validation error</p>
+    </div>
+    
+    <div>
+        <label>nickname</label>
+        <input type="text" th:field="*{mnickname}"/>
+        <p th:each="error : ${#fields.errors('mnickname')}" 
+          th:text="${error}">Validation error</p>
+    </div>
+
+    <div>
+        <label>password</label>
+        <input type="password" th:field="*{mpwd}"/>
+        <p th:each="error : ${#fields.errors('mpwd')}" 
+          th:text="${error}">Validation error</p>
+    </div>
+    
+    <div>
+        <label>password double check</label>
+        <input type="password" />
+    </div>
+    
+    <button type="submit" >sign up</button>
+</form>
+<a th:href="@{/login.html}">go to sign in</a>
+</body>
+
+</html>
