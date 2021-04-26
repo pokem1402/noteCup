@@ -47,7 +47,8 @@ public class ContentScript implements Serializable {
 	private String ctext;
 	
 	@OneToOne
-	@Cascade(CascadeType.ALL)
+	@ToString.Exclude
+	@Cascade(CascadeType.REMOVE)
 	@PrimaryKeyJoinColumn(name = "cid", referencedColumnName = "cid") // tbl_contents_cid?...or just cid?
 	private ContentWrapperInput contentWrapper; // cid
 	

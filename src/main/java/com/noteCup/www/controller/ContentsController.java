@@ -49,9 +49,9 @@ public class ContentsController {
 	@GetMapping("/view/item")
 	public String contentFrm(WebRequest request, Model model, HttpSession ss) {
 		Map<Object,Object> hm = new HashMap<Object,Object>();  
-		hm.put( "cid", Integer.parseInt(request.getParameter("cid"))  );
+		hm.put( "cid",  request.getParameter("cid") );
 		hm.put( "ctype", request.getParameter("ctype"));
-		model.addAttribute("contentHtml", cm.read(hm));
+		model.addAttribute("contentHtml", cm.read(hm) );
 		return "contentFrm";
 	}
 	
@@ -59,11 +59,8 @@ public class ContentsController {
 	
 	@PostMapping("/edit/delete")
 	public String delete(WebRequest request, Model model, HttpSession ss) {
-		Map<Object,Object> hm = new HashMap<Object,Object>();  
-		hm.put( "cid", Integer.parseInt( request.getParameter("cid") )  );
-		hm.put("ctype", request.getParameter("ctype"));
-		cm.delete(hm);
-		return "/";
+		cm.delete(request.getParameter("cid"));
+		return "redirect:/";
 	}
 	
 	

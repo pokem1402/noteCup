@@ -9,6 +9,8 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.transaction.Transactional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
@@ -32,6 +34,8 @@ import lombok.extern.log4j.Log4j2;
 public class ContentsMM {
 
 	ModelAndView mav;
+
+	private static final Logger log = LoggerFactory.getLogger(ContentsMM.class);
 
 	@Autowired
 	private IContentWrapperRepository crdao;
@@ -82,64 +86,52 @@ public class ContentsMM {
 
 	}
 
-	public void delete(Map<Object, Object> hm) {
-		switch ( hm.get("ctype").toString() ) {
+	@Transactional
+	public void delete(String cid) {
 
-		case "post":
-			//@formatter:off
-			cdao.deleteByCid(hm.get("cid"));
-			//@formatter:on
-			break;
-		case "script":
-			//@formatter:offs
-			sdao.deleteByCid(hm.get("cid"));
-			//@formatter:on
-			break;
-		}
+		long id = Long.parseLong(cid);
 		
+		cdao.deleteById(id);	
+
 	}
 
 	public String read(Map<Object, Object> hm) {
 		String result = "";
-		System.out.println("RULISTsJHERSKTJE???????");
-		switch ( hm.get("ctype").toString() ) {
+		switch (hm.get("ctype").toString()) {
 
 		case "post":
 			//@formatter:off
-			System.out.println("RULISTJHERSKTJE???????");
 			ContentPost cp = new ContentPost();
-			cp = cdao.findByCid(hm.get("cid"));
+			cp = cdao.findByCid( Long.valueOf( (String) hm.get("cid") ) );
 			result = makeHtml(cp);
+			
 			//@formatter:on
 			break;
 		case "script":
 			//@formatter:off
 			ContentScript cs  = new ContentScript();
-			cs = sdao.findByCid(hm.get("cid"));
+			cs = sdao.findByCid( Long.valueOf((String) hm.get("cid")) );
 			result = makeHtml(cs);
 			//@formatter:on
 			break;
 		}
-
 		return result;
 	}
-	
-	
+
 	public String makeHtml(ContentPost cp) {
 		StringBuilder sb = new StringBuilder();
-		/*~~~~*/
-		sb.append("<input type='text'>");
-		//sb.append(cp.getCtitle());
-		//sb.append(cp.getCtext());
-		sb.append("</input>");		
-		return sb.toString();
-	}
-	
-	public String makeHtml(ContentScript cs) {
-		StringBuilder sb = new StringBuilder();
-		/*~~~~*/
+		sb.append("<h2>" + cp.getCtitle() + "</h2>");
+		sb.append("<h3>" + cp.getContentWrapper().getMemberInput().getMid() + "</h3>");
+		sb.append("<article>" + cp.getCtext() + "</article>");
+
 		return sb.toString();
 	}
 
+	public String makeHtml(ContentScript cs) {
+		StringBuilder sb = new StringBuilder();
+		sb.append("<h3>" + cs.getContentWrapper().getMemberInput().getMid() + "</h3>");
+		sb.append("<article>" + cs.getCtext() + "</article>");
+		return sb.toString();
+	}
 
 }
