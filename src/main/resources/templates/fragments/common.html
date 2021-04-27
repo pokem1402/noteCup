@@ -2,57 +2,66 @@
 
 <html xmlns:th="http://www.thymeleaf.org">
 <!-- Required meta tags -->
-<head th:fragment="head(title)">
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
-    <link href="starter-template.css" th:href="@{/starter-template.css}" rel="stylesheet">
-    <title th:text="${title}"></title>
+<head th:fragment="head(title)">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<!-- default header name is X-CSRF-TOKEN -->
+    <meta id="_csrf" name="_csrf" th:content="${_csrf.token}" />
+    <meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}" />
+	<!-- default header name is X-CSRF-TOKEN -->
+    
+	<!-- Bootstrap CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+	<link href="starter-template.css" th:href="@{/starter-template.css}" rel="stylesheet">
+	<title th:text="${title}"></title>
 </head>
 
 
 
 <body>
-  
-    <header th:fragment="menu(menu)">
-  <!-- Fixed navbar -->
-  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="/">로고</a>
-      
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      
-      <div class="collapse navbar-collapse" id="navbarCollapse">
-        <ul class="navbar-nav me-auto mb-2 mb-md-0">
-        
 
-        <li class="nav-item" th:classappend="${menu} == 'home'? 'active'">
-          <a class="nav-link" aria-current="page" href="/member/auth/join">회원가입</a>
-        </li>  
-       
-        <li class="nav-item" th:classappend="${menu} == 'home'? 'active'">
-          <a class="nav-link" aria-current="page" href="/member/auth/login">로그인</a>
-        </li>  
+	<header th:fragment="menu(menu)">
+		<!-- Fixed navbar -->
+		<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+			<div class="container-fluid">
+				<a class="navbar-brand" href="/">로고</a>
 
-    
-                
-        <li class="nav-item" th:classappend="${menu} == 'board'? 'active'">
-          	<a class="nav-link" aria-current="page" href="/content/edit/write">글쓰기</a>
-        </li>
-        <li class="nav-item" th:classappend="${menu} == 'board'? 'active'">
-        	<a class="nav-link" aria-current="page" href="/member/auth/logout">로그아웃</a><br/>
-        </li>
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+					aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
 
-         
-      </div>
-    </div>
-  </nav>
-</header>
-  
+				<div class="collapse navbar-collapse" id="navbarCollapse">
+					<ul class="navbar-nav me-auto mb-2 mb-md-0">
+
+
+						<li class="nav-item" th:classappend="${menu} == 'home'? 'active'">
+							<a class="nav-link" aria-current="page" href="#" th:href="@{/registration}"
+								th:text="#{label.registration.link}"></a>
+						</li>
+
+						<li class="nav-item" th:classappend="${menu} == 'home'? 'active'">
+							<a class="nav-link" aria-current="page" href="#" th:href="@{/login}"
+								th:text="#{label.login.link}" id="login"></a>
+						</li>
+						<li class="nav-item" th:classappend="${menu} == 'board'? 'active'">
+							<a class="nav-link" aria-current="page" href="#" th:href="@{/content/edit/write}"
+								th:text="#{label.contents.write.link}">글쓰기</a>
+						</li>
+						<li class="nav-item" th:classappend="${menu} == 'board'? 'active'">
+							<a class="nav-link" aria-current="page" href="#" th:href="@{/logout}"
+								th:text="#{label.logout.link}">로그아웃</a><br />
+						</li>
+
+
+				</div>
+			</div>
+		</nav>
+	</header>
+
 </body>
-  
+
 </html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<title th:text="#{page.registration.title}">registration</title>
+</head>
+<body>
+	<h1 th:text="#{label.registration.form.title}">form</h1>
+	
+	<h3 th:text="${message}"></h3>
+	<form action="#" th:action="@{/registration}" th:object="${user}" method="POST" enctype="utf8">
+        <div>
+            <label th:text="#{label.user.email}">email</label>
+            <input type="email" th:field="*{email}" />
+            <p th:each="error : ${#fields.errors('email')}" th:text="${error}">Validation error</p>
+        </div>
+        <div>
+            <label th:text="#{label.user.password}">password</label>
+            <input type="password" th:field="*{password}" />
+            <p th:each="error : ${#fields.errors('password')}" th:text="${error}">Validation error</p>
+        </div>
+        <div>
+            <label th:text="#{label.user.passwordConfirm}">비밀번호 확인</label>
+            <input type="password" th:field="*{matchingPassword}" />
+        </div>
+        <div>
+            <label th:text="#{label.user.nickname}">닉네임</label>
+            <input type="text" th:field="*{nickname}" />
+        </div>
+        <div>
+            <label th:text="#{label.user.introduction}">자기 소개</label>
+            <input type="textarea" th:field="*{introduction}" />
+        </div>
+
+
+        <button type="submit" th:text="#{label.registration.form.submit}">submit</button>
+        <button type="reset" th:text="#{label.form.reset}">reset</button>
+
+    </form>
+
+    <a th:href="@{/login}" th:text="#{label.login.link}">login</a>
+</body>
+
+</html>
