@@ -1,6 +1,8 @@
 package com.noteCup.member.service;
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -126,5 +128,11 @@ public class MemberMM implements UserDetailsService, IMemberService{
 		return tokenRepository.findByToken(VerificationToken);
 	}
 
+	public List<MemberInfo> getMemberList() {
+		List<MemberInfo> mList = memberRepository.findAll();
+		return mList;
+	}
+
+	
 
 }

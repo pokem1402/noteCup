@@ -9,4 +9,5 @@ public interface IPostRepository extends JpaRepository<ContentPost, Long> {
 
 	ContentPost findByCid(Object object);
 
+	//List <ContentPost> findByCid(Long cid);
 }
