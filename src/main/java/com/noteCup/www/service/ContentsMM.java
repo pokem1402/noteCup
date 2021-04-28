@@ -123,7 +123,7 @@ public class ContentsMM {
 		sb.append("<h2>" + cp.getCtitle() + "</h2>");
 		sb.append("<h3>" + cp.getContentWrapper().getMemberInput().getMid() + "</h3>");
 		sb.append("<article>" + cp.getCtext() + "</article>");
-
+		//글 삭제 링크 버튼 만들어 줘야함
 		return sb.toString();
 	}
 
@@ -131,6 +131,7 @@ public class ContentsMM {
 		StringBuilder sb = new StringBuilder();
 		sb.append("<h3>" + cs.getContentWrapper().getMemberInput().getMid() + "</h3>");
 		sb.append("<article>" + cs.getCtext() + "</article>");
+		//글 삭제 링크 버튼 만들어 줘야함
 		return sb.toString();
 	}
 
