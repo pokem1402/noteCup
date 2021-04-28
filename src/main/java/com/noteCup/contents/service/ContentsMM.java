@@ -134,4 +134,20 @@ public class ContentsMM {
 		return sb.toString();
 	}
 
+	public void getContentList(ModelAndView mav, String nickname) {
+		MemberInfo mi = mdao.findByNickname(nickname);
+		Long mid = mi.getMid();
+		//List <ContentWrapper> cwList = crdao.findByMid(mid);
+		List <ContentPost> cpList;
+		List <ContentScript> csList;
+		
+		/*for(ContentWrapper cw : cwList ) {//cdao post , sdao script
+			//cpList = cdao.findByCid(cw.getCid());
+			//csList = sdao.findByCid(cw.getCid());
+		}*/
+		
+		//mav.addObject("cpList",cpList);
+			
+	}
+
 }

@@ -1,6 +1,7 @@
 package com.noteCup.contents.repository;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -16,5 +17,7 @@ public interface IContentWrapperRepository extends JpaRepository<ContentWrapper,
 //	void deleteByCid(long cid);
 
 	ContentWrapper findById(long cid);
+
+	List<ContentWrapper> findByMid(Long mid);
 
 }

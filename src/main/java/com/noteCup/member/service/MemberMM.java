@@ -105,4 +105,11 @@ public class MemberMM implements UserDetailsService, IMemberService{
 		return false;
 	}
 
+	public List<MemberInfo> getMemberList() {
+		List<MemberInfo> mList = memberRepository.findAll();
+		return mList;
+	}
+
+	
+
 }
