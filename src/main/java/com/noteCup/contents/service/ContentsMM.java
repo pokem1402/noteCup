@@ -1,17 +1,10 @@
 package com.noteCup.contents.service;
 
-import java.math.BigDecimal;
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
 import javax.transaction.Transactional;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
@@ -34,8 +27,6 @@ import lombok.extern.log4j.Log4j2;
 public class ContentsMM {
 
 	ModelAndView mav;
-
-	private static final Logger log = LoggerFactory.getLogger(ContentsMM.class);
 
 	@Autowired
 	private IContentWrapperRepository crdao;
