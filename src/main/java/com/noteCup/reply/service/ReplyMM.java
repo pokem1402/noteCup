@@ -38,16 +38,18 @@ public class ReplyMM {
 
 	public List <Reply> getReplyByCid(long cid) {
 		/*ReplyInput replyInput = ReplyInput.builder().cid(cid).build();*/
-		ContentWrapper contentWrapper = new ContentWrapper();
-		contentWrapper.setCid(cid);
+		ContentWrapper contentWrapper = ContentWrapper.builder()
+										.cid(cid)
+										.build();
 		List <Reply> replyList = replyRepository.findByContentWrapper(contentWrapper); //vo에 담을게 rid, rtext, mid(작성자)임.
 		
 		return replyList; 
 	}
 
 	public void create(ReplyInput replyInput) {
-		ContentWrapper contentWrapper = new ContentWrapper();
-		contentWrapper.setCid(replyInput.getCid());
+		ContentWrapper contentWrapper = ContentWrapper.builder()
+				.cid(replyInput.getCid())
+				.build();
 		
 		Reply reply = Reply.builder().mid(replyInput.getMid())
 						.rtext(replyInput.getRtext())
@@ -60,8 +62,9 @@ public class ReplyMM {
 	}
 
 	public void update(ReplyInput replyInput) {
-		ContentWrapper contentWrapper = new ContentWrapper();
-		contentWrapper.setCid(replyInput.getCid());
+		ContentWrapper contentWrapper = ContentWrapper.builder()
+				.cid(replyInput.getCid())
+				.build();
 		
 		Reply reply = Reply.builder().mid(replyInput.getMid())
 						.rtext(replyInput.getRtext())
