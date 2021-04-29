@@ -30,8 +30,8 @@ import lombok.ToString;
 @Getter
 @ToString
 @Entity
-@Table(name = "tbl_contentWrapper")
 @Builder
+@Table(name = "tbl_contentWapper")
 public class ContentWrapper {
 	
 	@Id

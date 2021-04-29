@@ -19,9 +19,13 @@ import com.noteCup.contents.repository.IContentWrapperRepository;
 import com.noteCup.contents.repository.IPostRepository;
 import com.noteCup.contents.repository.IScriptRepository;
 import com.noteCup.member.model.domain.MemberInfo;
+import com.noteCup.member.model.dto.MemberInput;
 import com.noteCup.member.repository.IMemberRepository;
 
 import lombok.extern.log4j.Log4j2;
+
+
+
 
 @Service
 @Log4j2
@@ -38,9 +42,9 @@ public class ContentsMM {
 	@Autowired
 	private IScriptRepository scriptRepository;
 
-	
+
 	private void buildAndSave(final ContentInput contentInput, final ContentWrapper contentWrapper) {
-		
+
 		switch (ContentType.findType(contentInput.getContentType())) {
 
 		case POST:
@@ -101,7 +105,11 @@ public class ContentsMM {
 		postRepository.deleteById(id);
 
 	}
-
+	
+	/**
+	 * @author daniel
+	 * read : 컨텐츠를(post or script) 읽는 메소드
+	 */	
 	public String read(Map<Object, Object> hm) {
 		String result = "";
 		switch (hm.get("ctype").toString()) {
@@ -125,19 +133,28 @@ public class ContentsMM {
 		return result;
 	}
 
+	/**
+	 * @author daniel
+	 * ContentPost : 포스트를 html로 만들어주는 메소드
+	 */	
 	public String makeHtml(final ContentPost cp) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("<h2>" + cp.getCtitle() + "</h2>");
 		sb.append("<h3>" + cp.getContentWrapper().getMemberInfo().getNickname() + "</h3>");
 		sb.append("<article>" + cp.getCtext() + "</article>");
-
+		//글 삭제 링크 버튼 만들어 줘야함
 		return sb.toString();
 	}
 
+	/**
+	 * @author daniel
+	 * ContentScript : 스크립트를 html로 만들어주는 메소드
+	 */
 	public String makeHtml(final ContentScript cs) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("<h3>" + cs.getContentWrapper().getMemberInfo().getNickname() + "</h3>");
 		sb.append("<article>" + cs.getCtext() + "</article>");
+		//글 삭제 링크 버튼 만들어 줘야함
 		return sb.toString();
 	}
 

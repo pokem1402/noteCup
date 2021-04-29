@@ -4,6 +4,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>writeFrm</title>
+
 	<script th:src="@{/webjars/jquery/3.6.0/jquery.min.js}"></script>
 	<script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
 	<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
@@ -13,12 +14,13 @@
 
 	<h1>noteCup index</h1>
 
+
 	<form action="#" th:action="@{/content/edit/write}" th:object="${content}" method="POST" enctype="utf8">
 		<!--	cno : <input type="text" th:field="*{cno}"/> <br/>-->
 		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 		양식 : <select id="selector" th:field="*{contentType}">
-			<option th:each="contentType : ${T(com.noteCup.contents.constant.ContentType).values()}"
-				th:value="${contentType.name()}" th:text="${contentType.name()}"></option>
+			<option th:each="contentType : ${T(com.noteCup.contents.constant.ContentType).values()}" 
+			th:value="${contentType.name()}" th:text="${contentType.name()}"></option>
 		</select>
 		<div id="title">
 			제목 : <input type="text" th:field="*{title}" /> <br />
