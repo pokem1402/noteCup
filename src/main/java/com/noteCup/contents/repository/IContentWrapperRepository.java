@@ -17,7 +17,7 @@ public interface IContentWrapperRepository extends JpaRepository<ContentWrapper,
 
 //	void deleteByCid(long cid);
 
-	ContentWrapper findById(long cid);
+	//ContentWrapper findById(long cid);
 
 //	@Query("select ")
 	List<ContentWrapper> findAllByMemberInfo(MemberInfo member);
