@@ -52,8 +52,8 @@ public class Reply {
 	@Column(name = "rid")
 	private long rid;
 	
-	@Column(name = "cid")
-	private long cid;
+	/*@Column(name = "cid")
+	private long cid;*/
 	
 	@Column(name = "mid")
 	private long mid;
@@ -64,7 +64,7 @@ public class Reply {
 	@Size(max=255)
 	private String rtext;
 	
-	@ManyToOne
+	@ManyToOne //is it okay?
 	@ToString.Exclude
 	@Cascade(CascadeType.REMOVE)
 	@PrimaryKeyJoinColumn(name = "cid", referencedColumnName = "cid") // tbl_contents_cid?...or just cid?
