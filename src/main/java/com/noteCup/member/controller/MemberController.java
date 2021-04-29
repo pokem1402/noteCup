@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.noteCup.member.model.domain.MemberInfo;
 import com.noteCup.member.model.dto.MemberInput;
+import com.noteCup.member.model.vo.MemberView;
 import com.noteCup.member.service.MemberMM;
 
 
@@ -51,7 +52,7 @@ public class MemberController {
 	
 	@GetMapping("/list")
 	public String MemberList(Model model) {		
-		List<MemberInfo> mList = mm.getMemberList();
+		List<MemberView> mList = mm.getMemberViewList();
 		model.addAttribute("userList", mList);
 		return "memberList";
 	}
