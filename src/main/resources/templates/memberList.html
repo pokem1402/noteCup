@@ -23,7 +23,7 @@
      </thead>
      <tbody>
      <tr th:each="user : ${userList}">
-         <td><a th:text="${user.nickname}" th:href="@{/content/list(nickname=${user.nickname})}"></a></td>             
+         <td><a th:text="${user.nickname}" th:href="@{/content/list(mid=${user.mid})}"></a></td>             
      </tr>
      </tbody>
      </table> 

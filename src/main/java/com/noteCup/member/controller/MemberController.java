@@ -49,7 +49,7 @@ public class MemberController {
 		return "loginSuccess";
 	}
 	
-	@GetMapping("/auth/list")
+	@GetMapping("/list")
 	public String MemberList(Model model) {		
 		List<MemberInfo> mList = mm.getMemberList();
 		model.addAttribute("userList", mList);

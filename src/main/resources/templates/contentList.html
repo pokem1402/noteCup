@@ -12,22 +12,26 @@
 
   
    <h2>컨텐츠리스트</h2>
+
+<p th:text="${contentsList}"></p>  
   
-  
-  <!-- <table>
+   <table>
      <thead>
     	<tr>
          <td>아이디</td>
         
+        
+        
     	</tr>
      </thead>
      <tbody>
-     <tr th:each="user : ${userList}">
-         <td th:text="${user.mid}"><a th:href="@{/member/details(id=${orderInfo.seq})}"></a></td>             
+<!--     <tr th:each="contents : ${contentList}">
+         <td th:text="$.mid}"><a th:href="@{/member/details(id=${orderInfo.seq})}"></a></td>             
      </tr>
-     </tbody>
-     </table>  -->
+-->     </tbody>
+     </table> 
    
   </body>
+
  
 </html>

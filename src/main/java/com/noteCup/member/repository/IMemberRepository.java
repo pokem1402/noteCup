@@ -17,5 +17,5 @@ public interface IMemberRepository extends JpaRepository<MemberInfo, Long> {
 	int countByMid(String id);
 	
 	MemberInfo findByNickname(String nickname);//by simok
-		
+	MemberInfo findByMid(Long mid);
 }

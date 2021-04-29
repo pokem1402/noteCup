@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
@@ -35,6 +37,7 @@ public class ContentScript implements Serializable {
 	private static final long serialVersionUID = -3261856128882160625L;
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "cid")
 	private long cid;
 	
@@ -55,7 +58,6 @@ public class ContentScript implements Serializable {
 		Assert.hasText(contentWrapper.getCid()+"", "cid must not be empty");
 		Assert.hasText(ctext, "text must not be empty");
 		this.contentWrapper = contentWrapper;
-		this.cid = contentWrapper.getCid();
 		this.ctext = ctext;
 	}
 	

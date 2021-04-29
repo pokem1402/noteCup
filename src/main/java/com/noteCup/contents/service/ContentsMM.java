@@ -30,18 +30,19 @@ public class ContentsMM {
 	ModelAndView mav;
 
 	@Autowired
-	private IContentWrapperRepository crdao;
+	private IContentWrapperRepository contentWrapperRepository;
 	@Autowired
-	private IMemberRepository mdao;
+	private IMemberRepository memberRepository;
 	@Autowired
-	private IPostRepository cdao;
+	private IPostRepository postRepository;
 	@Autowired
-	private IScriptRepository sdao;
+	private IScriptRepository scriptRepository;
 
-	public void create(ContentInput contentInput) {
+	@Transactional
+	public void create(ContentInput contentInput, String email) {
 
 		log.warn(contentInput.toString());
-		Optional<MemberInfo> member = mdao.findById((long) 1);
+		Optional<MemberInfo> member = memberRepository.findByEmail(email);
 
 		log.warn(member.toString());
 
@@ -49,7 +50,10 @@ public class ContentsMM {
 		contentWrapper.setMemberInfo(member.get());
 		log.warn(contentWrapper.toString());
 
-		contentWrapper = crdao.save(contentWrapper);
+		contentWrapper = contentWrapperRepository.save(contentWrapper);
+
+		log.warn(contentWrapper.toString());
+		log.warn(contentInput.toString());
 
 		switch (ContentType.findType(contentInput.getContentType())) {
 
@@ -60,8 +64,12 @@ public class ContentsMM {
 									.ctitle(contentInput.getTitle())
 									.ctext(contentInput.getText())
 									.build();
+			
+			log.warn(post.getContentWrapper().toString());
 
-			cdao.save(post);
+			postRepository.save(post);
+			
+			
 			//@formatter:on
 			break;
 		case SCRIPT:
@@ -71,7 +79,8 @@ public class ContentsMM {
 										.ctext(contentInput.getText())
 										.build();
 
-			sdao.save(script);
+			scriptRepository.save(script);
+			
 			//@formatter:on
 			break;
 		}
@@ -82,8 +91,8 @@ public class ContentsMM {
 	public void delete(String cid) {
 
 		long id = Long.parseLong(cid);
-		
-		cdao.deleteById(id);	
+
+		postRepository.deleteById(id);
 
 	}
 
@@ -94,7 +103,7 @@ public class ContentsMM {
 		case "post":
 			//@formatter:off
 			ContentPost cp = new ContentPost();
-			cp = cdao.findByCid( Long.valueOf( (String) hm.get("cid") ) );
+			cp = postRepository.findByCid( Long.valueOf( (String) hm.get("cid") ) );
 			result = makeHtml(cp);
 			
 			//@formatter:on
@@ -102,7 +111,7 @@ public class ContentsMM {
 		case "script":
 			//@formatter:off
 			ContentScript cs  = new ContentScript();
-			cs = sdao.findByCid( Long.valueOf((String) hm.get("cid")) );
+			cs = scriptRepository.findByCid( Long.valueOf((String) hm.get("cid")) );
 			result = makeHtml(cs);
 			//@formatter:on
 			break;
@@ -126,20 +135,21 @@ public class ContentsMM {
 		return sb.toString();
 	}
 
-	public void getContentList(ModelAndView mav, String nickname) {
-		MemberInfo mi = mdao.findByNickname(nickname);
-		Long mid = mi.getMid();
-		//List <ContentWrapper> cwList = crdao.findByMid(mid);
-		List <ContentPost> cpList;
-		List <ContentScript> csList;
+	public List<ContentWrapper> getContentsList(long mid) {
+
+		MemberInfo member = MemberInfo.builder()
+							.mid(mid)
+							.build();
 		
-		/*for(ContentWrapper cw : cwList ) {//cdao post , sdao script
-			//cpList = cdao.findByCid(cw.getCid());
-			//csList = sdao.findByCid(cw.getCid());
-		}*/
+		List<ContentWrapper> contentList = contentWrapperRepository.findAllByMemberInfo(member);
+
 		
-		//mav.addObject("cpList",cpList);
-			
+		
+		return null;
+		
+		
 	}
+
+
 
 }

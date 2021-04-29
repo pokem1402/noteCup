@@ -1,6 +1,8 @@
 package com.noteCup.member.service;
 
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,7 @@ import com.noteCup.member.exception.UserAlreadyExistException;
 import com.noteCup.member.model.domain.MemberInfo;
 import com.noteCup.member.model.domain.VerificationToken;
 import com.noteCup.member.model.dto.MemberInput;
+import com.noteCup.member.model.vo.MemberView;
 import com.noteCup.member.repository.IMemberRepository;
 import com.noteCup.member.repository.IVerificationTokenRepository;
 
@@ -134,11 +137,32 @@ public class MemberMM implements UserDetailsService, IMemberService{
 		return tokenRepository.findByToken(VerificationToken);
 	}
 
-	public List<MemberInfo> getMemberList() {
+	public List<MemberView> getMemberViewList() {
 		List<MemberInfo> mList = memberRepository.findAll();
-		return mList;
+		return this.getMembersView(mList);
 	}
 
+	public MemberView getMemberView(long mid) {
+		
+		return getMembersView(Arrays.asList(memberRepository.findByMid(mid))).get(0);
+	}
+	private List<MemberView> getMembersView(List<MemberInfo> mList){
+		
+		ArrayList<MemberView> memberList = new ArrayList<MemberView>();
+		
+		mList.forEach(m->{
+			
+			MemberView member = MemberView.builder()
+								.mid(m.getMid())
+								.nickname(m.getNickname())
+								.introduction(m.getIntroduction())
+								.build();
+			memberList.add(member);
+		});
+		
+		return memberList;
+		
+	}
 	
 
 }
