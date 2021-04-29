@@ -1,6 +1,5 @@
 package com.noteCup.member.repository;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -16,5 +15,7 @@ public interface IMemberRepository extends JpaRepository<MemberInfo, Long> {
 	int countByEmail(String email);
 	int countByNickname(String nickname);
 	int countByMid(String id);
+	
+	MemberInfo findByNickname(String nickname);//by simok
 		
 }

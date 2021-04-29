@@ -1,17 +1,11 @@
 package com.noteCup.contents.service;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
 import javax.transaction.Transactional;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
@@ -34,8 +28,6 @@ import lombok.extern.log4j.Log4j2;
 public class ContentsMM {
 
 	ModelAndView mav;
-
-	private static final Logger log = LoggerFactory.getLogger(ContentsMM.class);
 
 	@Autowired
 	private IContentWrapperRepository crdao;
@@ -132,6 +124,22 @@ public class ContentsMM {
 		sb.append("<h3>" + cs.getContentWrapper().getMemberInfo().getNickname() + "</h3>");
 		sb.append("<article>" + cs.getCtext() + "</article>");
 		return sb.toString();
+	}
+
+	public void getContentList(ModelAndView mav, String nickname) {
+		MemberInfo mi = mdao.findByNickname(nickname);
+		Long mid = mi.getMid();
+		//List <ContentWrapper> cwList = crdao.findByMid(mid);
+		List <ContentPost> cpList;
+		List <ContentScript> csList;
+		
+		/*for(ContentWrapper cw : cwList ) {//cdao post , sdao script
+			//cpList = cdao.findByCid(cw.getCid());
+			//csList = sdao.findByCid(cw.getCid());
+		}*/
+		
+		//mav.addObject("cpList",cpList);
+			
 	}
 
 }

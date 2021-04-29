@@ -2,6 +2,7 @@ package com.noteCup.member.model.domain;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Locale;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -9,10 +10,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.Size;
 
+import org.hibernate.annotations.ColumnDefault;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -83,8 +86,10 @@ public class MemberInfo implements UserDetails {
 	@Transient
 	private boolean credentialsNonExpired;
 
-	@Transient
+	@Column(name = "enabled")
 	private boolean enabled;
+	
+	private Locale locale = Locale.KOREAN;
 	
 	@Builder
 	//@formatter:off
@@ -120,6 +125,8 @@ public class MemberInfo implements UserDetails {
 		return roles;
 	}
 
+	@OneToOne(mappedBy="memberInfo")
+	private VerificationToken verficationToken;
 	
 	@Override
 	public String getUsername() { // id
@@ -132,4 +139,4 @@ public class MemberInfo implements UserDetails {
 	}
 
 
-}
+}--
