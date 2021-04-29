@@ -58,6 +58,7 @@ public class ContentPost implements Serializable {
 	@PrimaryKeyJoinColumn(name = "cid", referencedColumnName = "cid") // tbl_contents_cid?...or just cid?
 	private ContentWrapper contentWrapper; // cid
 
+	
 	@Builder
 	public ContentPost(ContentWrapper contentWrapper, String ctitle, String ctext) {
 		Assert.hasText(contentWrapper.getCid()+"", "cid must not be empty");

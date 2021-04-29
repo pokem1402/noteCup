@@ -25,9 +25,13 @@ import com.noteCup.contents.repository.IContentWrapperRepository;
 import com.noteCup.contents.repository.IPostRepository;
 import com.noteCup.contents.repository.IScriptRepository;
 import com.noteCup.member.model.domain.MemberInfo;
+import com.noteCup.member.model.dto.MemberInput;
 import com.noteCup.member.repository.IMemberRepository;
 
 import lombok.extern.log4j.Log4j2;
+
+
+
 
 @Service
 @Log4j2
@@ -55,10 +59,19 @@ public class ContentsMM {
 
 		ContentWrapper contentWrapper = new ContentWrapper();
 		contentWrapper.setMemberInfo(member.get());
+		
+		System.out.println("멤버 아이디::::: " + contentWrapper.getMemberInfo().getMid() );
+		//System.out.println("멤버 아이디"+  contentWrapper.getMemberInfo().getMid());
+		//System.out.println("컨텐츠 래퍼포스트" + contentWrapper.getPost().getCtext());
+		System.out.println( "컨텐츠 아이디: " + contentWrapper.getCid() );
+		
 		log.warn(contentWrapper.toString());
-
+		
+		
 		contentWrapper = crdao.save(contentWrapper);
 
+		
+		
 		switch (ContentType.findType(contentInput.getContentType())) {
 
 		case POST:
@@ -94,7 +107,7 @@ public class ContentsMM {
 		cdao.deleteById(id);	
 
 	}
-
+		
 	public String read(Map<Object, Object> hm) {
 		String result = "";
 		switch (hm.get("ctype").toString()) {
@@ -118,6 +131,10 @@ public class ContentsMM {
 		return result;
 	}
 
+	/**
+	 * @author daniel
+	 * ContentPost : 포스트를 html로 만들어주는 메소드
+	 */	
 	public String makeHtml(ContentPost cp) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("<h2>" + cp.getCtitle() + "</h2>");
@@ -127,6 +144,10 @@ public class ContentsMM {
 		return sb.toString();
 	}
 
+	/**
+	 * @author daniel
+	 * ContentScript : 스크립트를 html로 만들어주는 메소드
+	 */
 	public String makeHtml(ContentScript cs) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("<h3>" + cs.getContentWrapper().getMemberInfo().getNickname() + "</h3>");

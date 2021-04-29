@@ -12,6 +12,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.DynamicInsert;
+
 import com.noteCup.member.model.domain.MemberInfo;
 
 import lombok.Getter;
@@ -23,6 +25,7 @@ import lombok.ToString;
 @ToString
 @Entity
 @Table(name = "tbl_contentWapper")
+//@DynamicInsert
 public class ContentWrapper {
 	
 	@Id
