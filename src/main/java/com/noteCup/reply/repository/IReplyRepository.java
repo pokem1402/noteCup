@@ -5,8 +5,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.noteCup.reply.model.dto.ReplyInput;
-import com.noteCup.reply.model.vo.ReplyVO;
+import com.noteCup.reply.model.domain.Reply;
 
 /** @formatter:off
  * --------------------------------------
@@ -23,8 +22,8 @@ import com.noteCup.reply.model.vo.ReplyVO;
  * @formatter:on
  */
 @Repository
-public interface IReplyRepository extends JpaRepository<ReplyInput,  Long>{
+public interface IReplyRepository extends JpaRepository<Reply,  Long>{
 
-	List<ReplyVO> findByCid(long cid);
+	List<Reply> findByContentWrapper(Object object);
 
 }

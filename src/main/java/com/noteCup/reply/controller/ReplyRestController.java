@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.noteCup.reply.model.domain.Reply;
 import com.noteCup.reply.model.dto.ReplyInput;
 import com.noteCup.reply.model.vo.ReplyVO;
 import com.noteCup.reply.service.ReplyMM;
@@ -52,7 +53,7 @@ public class ReplyRestController {
 
 	@GetMapping("/rest/view")
 	public String getReplyBycid(WebRequest request, Model model, HttpSession ss) {
-		List <ReplyVO> replyList = rm.getReplyByCid(Long.parseLong(request.getParameter("cid")));
+		List <Reply> replyList = rm.getReplyByCid(Long.parseLong(request.getParameter("cid")));
 		objectMapper = new ObjectMapper();
 		String json = null;
 		try {

@@ -14,6 +14,7 @@ public class NoteCupController {
 	@GetMapping("/")
     public String main(){
         //model.addAttribute("data","어서오세요!");
+		System.out.println("hello");
         return "main";
     }
 	

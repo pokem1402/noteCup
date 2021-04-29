@@ -67,7 +67,7 @@ public class Reply {
 	@ManyToOne //is it okay?
 	@ToString.Exclude
 	@Cascade(CascadeType.REMOVE)
-	@PrimaryKeyJoinColumn(name = "cid", referencedColumnName = "cid") // tbl_contents_cid?...or just cid?
+	@PrimaryKeyJoinColumn(name = "cid", referencedColumnName = "cid") 
 	private ContentWrapper contentWrapper; // cid
 	
 	@Builder
