@@ -59,9 +59,7 @@ public class GuestController {
 		
 		mav = new ModelAndView();
 		mav.setViewName("/registration");
-		
-		LOGGER.warn("Registering user account with information : {}", userDto);
-		
+	
 		try {
 			Long id = mService.registerNewUserAccount(userDto);
 
@@ -69,7 +67,7 @@ public class GuestController {
 			mav.addObject("message", "An account for that username/email already exist");
 			return mav;
 		}
-		return new ModelAndView("successRegistration", "user", userDto);
+		return new ModelAndView("/", "user", userDto);
 	}
 
 }
