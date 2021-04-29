@@ -19,6 +19,20 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/** @formatter:off
+ * ------------------------------------------------------
+ * <Description>
+ * ------------------------------------------------------
+ * @Project		: noteCup
+ * @Package		: com.noteCup.member.model.domain
+ * @File		: VerificationToken.java
+ * ------------------------------------------------------
+ * @author		: 김원빈
+ * @created		: 2021. 4. 29.
+ * @type		: VerificationToken
+ * @version		: 
+ * @formatter:on
+ */
 @Entity
 @Getter
 @Setter

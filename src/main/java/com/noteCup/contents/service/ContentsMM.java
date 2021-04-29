@@ -38,23 +38,9 @@ public class ContentsMM {
 	@Autowired
 	private IScriptRepository scriptRepository;
 
-	@Transactional
-	public void create(ContentInput contentInput, String email) {
-
-		log.warn(contentInput.toString());
-		Optional<MemberInfo> member = memberRepository.findByEmail(email);
-
-		log.warn(member.toString());
-
-		ContentWrapper contentWrapper = new ContentWrapper();
-		contentWrapper.setMemberInfo(member.get());
-		log.warn(contentWrapper.toString());
-
-		contentWrapper = contentWrapperRepository.save(contentWrapper);
-
-		log.warn(contentWrapper.toString());
-		log.warn(contentInput.toString());
-
+	
+	private void buildAndSave(final ContentInput contentInput, final ContentWrapper contentWrapper) {
+		
 		switch (ContentType.findType(contentInput.getContentType())) {
 
 		case POST:
@@ -83,14 +69,34 @@ public class ContentsMM {
 			
 			//@formatter:on
 			break;
+		default:
+			break;
 		}
+	}
+	
+	@Transactional
+	public void create(ContentInput contentInput, final String email) {
 
+		log.warn(contentInput.toString());
+		Optional<MemberInfo> member = memberRepository.findByEmail(email);
+
+		log.warn(member.toString());
+
+		ContentWrapper contentWrapper = ContentWrapper.builder()
+										.memberInfo(member.get())
+										.contentType(contentInput.getContentType())
+										.publish(true)
+										.build();
+		
+		log.warn(contentWrapper.toString());
+
+		this.buildAndSave(contentInput, contentWrapperRepository.save(contentWrapper));
 	}
 
 	@Transactional
-	public void delete(String cid) {
+	public void delete(final String cid) {
 
-		long id = Long.parseLong(cid);
+		final long id = Long.parseLong(cid);
 
 		postRepository.deleteById(id);
 
@@ -119,7 +125,7 @@ public class ContentsMM {
 		return result;
 	}
 
-	public String makeHtml(ContentPost cp) {
+	public String makeHtml(final ContentPost cp) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("<h2>" + cp.getCtitle() + "</h2>");
 		sb.append("<h3>" + cp.getContentWrapper().getMemberInfo().getNickname() + "</h3>");
@@ -128,14 +134,14 @@ public class ContentsMM {
 		return sb.toString();
 	}
 
-	public String makeHtml(ContentScript cs) {
+	public String makeHtml(final ContentScript cs) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("<h3>" + cs.getContentWrapper().getMemberInfo().getNickname() + "</h3>");
 		sb.append("<article>" + cs.getCtext() + "</article>");
 		return sb.toString();
 	}
 
-	public List<ContentWrapper> getContentsList(long mid) {
+	public List<ContentWrapper> getContentsList(final long mid) {
 
 		MemberInfo member = MemberInfo.builder()
 							.mid(mid)

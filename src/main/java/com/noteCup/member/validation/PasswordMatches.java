@@ -11,6 +11,20 @@ import javax.validation.Constraint;
 import javax.validation.Payload;
 
 
+/** @formatter:off
+ * ------------------------------------------------------
+ * <Description>
+ * ------------------------------------------------------
+ * @Project		: noteCup
+ * @Package		: com.noteCup.member.validation
+ * @File		: PasswordMatches.java
+ * ------------------------------------------------------
+ * @author		: 김원빈
+ * @created		: 2021. 4. 29.
+ * @type		: PasswordMatches
+ * @version		: 
+ * @formatter:on
+ */
 @Target({ElementType.TYPE, ElementType.ANNOTATION_TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 @Constraint(validatedBy = PasswordMatchesValidator.class)

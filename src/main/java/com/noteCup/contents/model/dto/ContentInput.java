@@ -13,7 +13,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ContentInput {
 
-	
 	private String title;
 	private String text;
 	private String contentType;

@@ -48,13 +48,14 @@ public class MemberMM implements UserDetailsService, IMemberService{
 	 * @formatter:on
 	 */
 	@Override
-	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+	public UserDetails loadUserByUsername(final String email) throws UsernameNotFoundException {
 		
 		MemberInfo userInfo = memberRepository.findByEmail(email)
 				.orElseThrow(()->new UsernameNotFoundException(email));
 		//@formatter:off
 		return userInfo.setAccountNonExpired(true)
 						.setAccountNonLocked(true)
+						.setEnabled(true)
 						.setCredentialsNonExpired(true);
 		//@formatter:on
 	}
@@ -75,7 +76,7 @@ public class MemberMM implements UserDetailsService, IMemberService{
 	 * @formatter:on
 	 */
 	@Override
-	public UserDetails registerNewUserAccount(MemberInput userform) throws UserAlreadyExistException {
+	public UserDetails registerNewUserAccount(final MemberInput userform) throws UserAlreadyExistException {
 				
 		if(checkEmailExist(userform.getEmail())) {
 			throw new UserAlreadyExistException("There is an account with that email address: " + userform.getEmail());
@@ -86,7 +87,7 @@ public class MemberMM implements UserDetailsService, IMemberService{
 	}
 	
 	@Override
-	public boolean checkEmailExist(String email) {
+	public boolean checkEmailExist(final String email) {
 		return memberRepository.countByEmail(email) > 0;
 	}
 	
@@ -114,17 +115,17 @@ public class MemberMM implements UserDetailsService, IMemberService{
 	}
 
 	@Override
-	public UserDetails getMember(String verificationToken) {
+	public UserDetails getMember(final String verificationToken) {
 		return tokenRepository.findByToken(verificationToken).getMemberInfo();
 	}
 
 	@Override
-	public void saveRegisteredUser(MemberInfo user) {
+	public void saveRegisteredUser(final MemberInfo user) {
 		memberRepository.save(user);
 	}
 
 	@Override
-	public void createVerificationToken(MemberInfo user, String token) {
+	public void createVerificationToken(final MemberInfo user, final String token) {
 		VerificationToken newToken = new VerificationToken(token, user);
 		
 		log.warn(newToken.toString());
@@ -133,7 +134,7 @@ public class MemberMM implements UserDetailsService, IMemberService{
 	}
 
 	@Override
-	public VerificationToken getVerificationToken(String VerificationToken) {
+	public VerificationToken getVerificationToken(final String VerificationToken) {
 		return tokenRepository.findByToken(VerificationToken);
 	}
 
@@ -161,6 +162,12 @@ public class MemberMM implements UserDetailsService, IMemberService{
 		});
 		
 		return memberList;
+		
+	}
+
+	public void deleteVerificationToken(long mid) {
+				
+		tokenRepository.deleteById(mid);
 		
 	}
 	

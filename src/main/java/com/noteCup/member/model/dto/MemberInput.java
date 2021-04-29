@@ -15,6 +15,20 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+/** @formatter:off
+ * ------------------------------------------------------
+ * <Description>
+ * ------------------------------------------------------
+ * @Project		: noteCup
+ * @Package		: com.noteCup.member.model.dto
+ * @File		: MemberInput.java
+ * ------------------------------------------------------
+ * @author		: 김원빈
+ * @created		: 2021. 4. 29.
+ * @type		: MemberInput
+ * @version		: 
+ * @formatter:on
+ */
 @PasswordMatches
 @Setter
 @Getter
@@ -61,7 +75,7 @@ public class MemberInput {
 				.nickname(nickname)
 				.email(email)
 				.introduction(introduction)
-				.auth("USER")
+				.auth("GUEST")
 				.build();
 	}
 }

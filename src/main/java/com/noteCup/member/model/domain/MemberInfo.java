@@ -66,6 +66,7 @@ public class MemberInfo implements UserDetails {
 	private String pwd;
 
 	@Column(name = "memail", unique = true)
+	@Size(max = 120)
 	private String email;
 
 	@Column(name = "mnickname")
@@ -73,6 +74,7 @@ public class MemberInfo implements UserDetails {
 	private String nickname;
 
 	@Column(name = "auth")
+	@Size(max = 100)
 	private String auth;
 
 	@Column(name = "mintro")
@@ -87,7 +89,8 @@ public class MemberInfo implements UserDetails {
 	@Transient
 	private boolean credentialsNonExpired;
 
-	@Column(name = "enabled")
+//	@Column(name = "enabled")
+	@Transient
 	private boolean enabled;
 	
 	private Locale locale = Locale.KOREAN;

@@ -1,9 +1,6 @@
 package com.noteCup.contents.model.domain;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,49 +8,42 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 import org.springframework.util.Assert;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.ToString;
 
+/** @formatter:off
+ * ------------------------------------------------------
+ * <Description>
+ * ------------------------------------------------------
+ * @Project		: noteCup
+ * @Package		: com.noteCup.contents.model.domain
+ * @File		: ContentMemo.java
+ * ------------------------------------------------------
+ * @author		: 김원빈
+ * @created		: 2021. 4. 29.
+ * @type		: ContentMemo
+ * @version		: 
+ * @formatter:on
+ */
 @Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
-@ToString
 @Table(name = "tbl_content")
-public class ContentPost implements Serializable {
+public class ContentMemo {
 
-	private static final long serialVersionUID = 494879747035498206L;
-
-	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy =GenerationType.AUTO)
 	@Column(name = "cid")
 	private long cid;
-
-	@Size(max = 120)
-	@Column(name = "ctitle")
-	@NotEmpty
-	@NotNull
-	private String ctitle;
-
+	
 	@Column(name = "ctext")
-	@NotEmpty
-	@NotNull
 	private String ctext;
-
+	
 	@OneToOne
 	@ToString.Exclude
 	@Cascade(CascadeType.REMOVE)
@@ -61,14 +51,14 @@ public class ContentPost implements Serializable {
 	private ContentWrapper contentWrapper; // cid
 
 	@Builder
-	public ContentPost(ContentWrapper contentWrapper, String ctitle, String ctext) {
+	public ContentMemo(ContentWrapper contentWrapper,
+						String ctext){
+		
 		Assert.hasText(contentWrapper.getCid()+"", "cid must not be empty");
 		Assert.hasText(ctext, "text must not be empty");
-		Assert.hasText(ctitle, "title must not be empty");
 		this.contentWrapper = contentWrapper;
-		this.contentWrapper.setPost(this);
-		this.ctitle = ctitle;
+		this.contentWrapper.setMemo(this);
 		this.ctext = ctext;
+		
 	}
 }
-

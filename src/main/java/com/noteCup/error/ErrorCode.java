@@ -36,11 +36,11 @@ public enum ErrorCode {
 	private String code;
 	private String description;
 	
-	private boolean hasAnnotation(String anno) {
+	private boolean hasAnnotation(final String anno) {
 		return annotation.indexOf(anno) != -1;
 	}
 	
-	public static ErrorCode findbyAnnotation(String annotation) {
+	public static ErrorCode findbyAnnotation(final String annotation) {
 		return Arrays.stream(ErrorCode.values())
 				.filter(e ->e.hasAnnotation(annotation))
 				.findAny()

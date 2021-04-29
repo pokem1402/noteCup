@@ -92,7 +92,7 @@ public class GuestController {
 		} catch (RuntimeException ex) {
 			ex.printStackTrace();
 			mav = new ModelAndView("/registration", "user", userDto);
-			mav.addObject("message", ex.getMessage());
+			mav.addObject("message", "runtime error : " + ex.getMessage());
 			return mav;
 
 		}
@@ -100,6 +100,12 @@ public class GuestController {
 	}
 
 
+//	@GetMapping("/registration/resendRegistrationToken")
+//	public GenericResponse resendRegistrationToken(HttpServletRequest request,
+//			@RequestParam("token") String existingToken) {
+//		
+//	}
+//	
 	
 	@GetMapping("/registration/Confirm")
 	public String confirmRegistration(WebRequest request, Model model, @RequestParam("token") String token){
@@ -121,8 +127,11 @@ public class GuestController {
 			return "redirect:/badUser.html?lang="+locale.getLanguage();
 		}
 		
-		user.setEnabled(true);
+		user.setAuth("USER");
 		mService.saveRegisteredUser(user);
+		
+		mService.deleteVerificationToken(user.getMid());
+		
 		return "redirect:/login?lang=" + request.getLocale().getLanguage();
 	}
 	

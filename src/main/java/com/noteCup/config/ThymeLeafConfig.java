@@ -14,6 +14,21 @@ import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ITemplateResolver;
 
+/** @formatter:off
+ * ------------------------------------------------------
+ * <Description>
+ * ThymeLeaf Configuration
+ * ------------------------------------------------------
+ * @Project		: noteCup
+ * @Package		: com.noteCup.config
+ * @File		: ThymeLeafConfig.java
+ * ------------------------------------------------------
+ * @author		: 김원빈
+ * @created		: 2021. 4. 27.
+ * @type		: ThymeLeafConfig
+ * @version		: 1.0
+ * @formatter:on
+ */
 public class ThymeLeafConfig implements WebMvcConfigurer, ApplicationContextAware {
 	
     @Autowired

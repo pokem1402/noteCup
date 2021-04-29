@@ -6,6 +6,20 @@ import javax.validation.ConstraintValidatorContext;
 import com.noteCup.member.model.dto.MemberInput;
 
 
+/** @formatter:off
+ * ------------------------------------------------------
+ * <Description>
+ * ------------------------------------------------------
+ * @Project		: noteCup
+ * @Package		: com.noteCup.member.validation
+ * @File		: PasswordMatchesValidator.java
+ * ------------------------------------------------------
+ * @author		: 김원빈
+ * @created		: 2021. 4. 29.
+ * @type		: PasswordMatchesValidator
+ * @version		: 
+ * @formatter:on
+ */
 public class PasswordMatchesValidator implements ConstraintValidator<PasswordMatches, Object> {
 
 	@Override

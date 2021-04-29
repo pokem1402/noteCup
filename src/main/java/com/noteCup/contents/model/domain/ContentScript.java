@@ -24,6 +24,20 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+/** @formatter:off
+ * ------------------------------------------------------
+ * <Description>
+ * ------------------------------------------------------
+ * @Project		: noteCup
+ * @Package		: com.noteCup.contents.model.domain
+ * @File		: ContentScript.java
+ * ------------------------------------------------------
+ * @author		: 김원빈
+ * @created		: 2021. 4. 29.
+ * @type		: ContentScript
+ * @version		: 
+ * @formatter:on
+ */
 @Getter
 @Setter
 @NoArgsConstructor 

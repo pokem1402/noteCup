@@ -17,6 +17,20 @@ import lombok.extern.log4j.Log4j2;
 
 import static com.noteCup.util.Util.getPropertiesValue;
 
+/** @formatter:off
+ * ------------------------------------------------------
+ * <Description>
+ * ------------------------------------------------------
+ * @Project		: noteCup
+ * @Package		: com.noteCup.member.registration
+ * @File		: RegistrationListner.java
+ * ------------------------------------------------------
+ * @author		: 김원빈
+ * @created		: 2021. 4. 29.
+ * @type		: RegistrationListner
+ * @version		: 
+ * @formatter:on
+ */
 @Log4j2
 @Component
 public class RegistrationListner implements ApplicationListener<OnRegistrationCompleteEvent> {
@@ -45,12 +59,14 @@ public class RegistrationListner implements ApplicationListener<OnRegistrationCo
 		memberService.createVerificationToken(user, token);
 		
 		String recipientAddress = user.getEmail();
-		String subject = messages.getMessage("registration.confirm.subject", null, event.getLocale());
+		String subject = messages.getMessage("registration.confirm.subject", null, Locale.ENGLISH);
 
 		String confirmUrl = event.getAppUrl() + "/registration/Confirm?token=" + token;
 		
-		String message = messages.getMessage("auth.message.regSucc", null, event.getLocale());
+		String message = messages.getMessage("auth.message.regSucc", null, Locale.ENGLISH);
 		
+		System.out.println(subject);
+		System.out.println(message);
 		System.out.println(confirmUrl);
 //		SimpleMailMessage email = new SimpleMailMessage();
 //		email.setTo(recipientAddress);

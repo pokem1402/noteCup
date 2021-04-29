@@ -9,6 +9,20 @@ import com.noteCup.member.model.domain.MemberInfo;
 import lombok.Getter;
 import lombok.Setter;
 
+/** @formatter:off
+ * ------------------------------------------------------
+ * <Description>
+ * ------------------------------------------------------
+ * @Project		: noteCup
+ * @Package		: com.noteCup.member.registration
+ * @File		: OnRegistrationCompleteEvent.java
+ * ------------------------------------------------------
+ * @author		: 김원빈
+ * @created		: 2021. 4. 29.
+ * @type		: OnRegistrationCompleteEvent
+ * @version		: 
+ * @formatter:on
+ */
 @Getter
 @Setter
 public class OnRegistrationCompleteEvent extends ApplicationEvent {

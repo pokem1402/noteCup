@@ -15,6 +15,20 @@ import com.noteCup.member.handler.LogoutHandler;
 import com.noteCup.member.service.MemberMM;
 
 
+/** @formatter:off
+ * ------------------------------------------------------
+ * <Description>
+ * ------------------------------------------------------
+ * @Project		: noteCup
+ * @Package		: com.noteCup.security
+ * @File		: SecurityConfig.java
+ * ------------------------------------------------------
+ * @author		: 김원빈
+ * @created		: 2021. 4. 29.
+ * @type		: SecurityConfig
+ * @version		: 
+ * @formatter:on
+ */
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
