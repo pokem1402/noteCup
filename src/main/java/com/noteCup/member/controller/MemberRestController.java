@@ -2,8 +2,6 @@ package com.noteCup.member.controller;
 
 import java.security.Principal;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.noteCup.member.model.dto.MemberInput;
 
-import lombok.extern.slf4j.Slf4j;
+import lombok.extern.log4j.Log4j2;
 
 /** @formatter:off
  * ------------------------------------------------------
@@ -28,13 +26,11 @@ import lombok.extern.slf4j.Slf4j;
  * @version		: 
  * @formatter:on
  */
-@RestController
-@Slf4j
-@RequestMapping("/user/rest")
+@Log4j2
+@RestController 
+@RequestMapping("/member/rest")
 public class MemberRestController {
 
-	private final Logger LOGGER = LoggerFactory.getLogger(getClass());
-	
 	
 	@PostMapping("/getname")
 	public ResponseEntity<?> getName(Principal principal){

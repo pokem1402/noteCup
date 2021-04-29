@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import com.noteCup.error.ErrorCode;
 import com.noteCup.error.ErrorResponse;
 
+import lombok.extern.log4j.Log4j2;
 import lombok.extern.slf4j.Slf4j;
 
 /** @formatter:off
@@ -35,17 +36,15 @@ import lombok.extern.slf4j.Slf4j;
  * @version		: 1.0
  * @formatter:on
  */
-@Slf4j
+@Log4j2
 @ControllerAdvice
 public class RegistrationAdvice{
-
-	private final Logger LOGGER = LoggerFactory.getLogger(getClass());
 
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	public ResponseEntity<List<ErrorResponse>> methodValidException(MethodArgumentNotValidException e,
 			HttpServletRequest request) {
 
-		LOGGER.warn("MethodArguwmentNotValidException 발생, url : {}, trace : {}", request.getRequestURI(),
+		log.warn("MethodArguwmentNotValidException 발생, url : {}, trace : {}", request.getRequestURI(),
 				e.getStackTrace());
 
 		List<ErrorResponse> errorResponses = makeErrorResponses(e.getBindingResult());

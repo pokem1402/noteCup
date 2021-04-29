@@ -4,11 +4,12 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
-import javax.validation.constraints.Max;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -17,7 +18,6 @@ import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 import org.springframework.util.Assert;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -37,6 +37,7 @@ public class ContentScript implements Serializable {
 	private static final long serialVersionUID = -3261856128882160625L;
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "cid")
 	private long cid;
 	
@@ -57,7 +58,6 @@ public class ContentScript implements Serializable {
 		Assert.hasText(contentWrapper.getCid()+"", "cid must not be empty");
 		Assert.hasText(ctext, "text must not be empty");
 		this.contentWrapper = contentWrapper;
-		this.cid = contentWrapper.getCid();
 		this.ctext = ctext;
 	}
 	
