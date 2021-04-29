@@ -61,8 +61,6 @@ public class ContentsMM {
 		log.warn(contentInput.toString());
 
 
-		
-		
 		switch (ContentType.findType(contentInput.getContentType())) {
 
 		case POST:
@@ -103,7 +101,11 @@ public class ContentsMM {
 		postRepository.deleteById(id);
 
 	}
-		
+	
+	/**
+	 * @author daniel
+	 * read : 컨텐츠를(post or script) 읽는 메소드
+	 */	
 	public String read(Map<Object, Object> hm) {
 		String result = "";
 		switch (hm.get("ctype").toString()) {
