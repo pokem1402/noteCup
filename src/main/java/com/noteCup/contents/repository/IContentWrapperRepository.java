@@ -17,6 +17,6 @@ public interface IContentWrapperRepository extends JpaRepository<ContentWrapper,
 
 	ContentWrapper findById(long cid);
 
-	List<ContentWrapper> findByMid(Long mid);
+	List<ContentWrapper> findByCid(Long cid);
 
 }

@@ -18,6 +18,9 @@ import com.noteCup.member.model.dto.MemberInput;
 import com.noteCup.member.repository.IMemberRepository;
 import com.noteCup.member.repository.IVerificationTokenRepository;
 
+import lombok.extern.log4j.Log4j2;
+
+@Log4j2
 @Service
 public class MemberMM implements UserDetailsService, IMemberService{
 	
@@ -120,6 +123,9 @@ public class MemberMM implements UserDetailsService, IMemberService{
 	@Override
 	public void createVerificationToken(MemberInfo user, String token) {
 		VerificationToken newToken = new VerificationToken(token, user);
+		
+		log.warn(newToken.toString());
+		
 		tokenRepository.save(newToken);
 	}
 

@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Locale;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -125,7 +126,7 @@ public class MemberInfo implements UserDetails {
 		return roles;
 	}
 
-	@OneToOne(mappedBy="memberInfo")
+	@OneToOne(cascade=CascadeType.PERSIST, mappedBy="memberInfo")
 	private VerificationToken verficationToken;
 	
 	@Override
@@ -139,4 +140,4 @@ public class MemberInfo implements UserDetails {
 	}
 
 
-}--
+}

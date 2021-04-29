@@ -4,6 +4,7 @@ import java.util.Calendar;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
@@ -79,6 +80,8 @@ public class GuestController {
 		try {
 			MemberInfo userRegistered = (MemberInfo) mService.registerNewUserAccount(userDto);
 
+			log.warn(userRegistered.toString());
+			
 			String appUrl = request.getContextPath();
 			eventPublisher.publishEvent(new OnRegistrationCompleteEvent(userRegistered, request.getLocale(), appUrl));
 			
@@ -87,14 +90,18 @@ public class GuestController {
 			mav.addObject("message", "An account for that username/email already exist");
 			return mav;
 		} catch (RuntimeException ex) {
-			return new ModelAndView("emailError", "user", userDto);
+			ex.printStackTrace();
+			mav = new ModelAndView("/registration", "user", userDto);
+			mav.addObject("message", ex.getMessage());
+			return mav;
+
 		}
-		return new ModelAndView("/", "user", userDto);
+		return new ModelAndView("redirect:/", "user", userDto);
 	}
 
 
 	
-	@GetMapping("/regstration/Confirm")
+	@GetMapping("/registration/Confirm")
 	public String confirmRegistration(WebRequest request, Model model, @RequestParam("token") String token){
 		
 		
@@ -116,7 +123,7 @@ public class GuestController {
 		
 		user.setEnabled(true);
 		mService.saveRegisteredUser(user);
-		return "redirect:/login.html?lang=" + request.getLocale().getLanguage();
+		return "redirect:/login?lang=" + request.getLocale().getLanguage();
 	}
 	
 }
