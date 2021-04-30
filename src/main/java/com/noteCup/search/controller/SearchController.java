@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.noteCup.member.model.domain.MemberInfo;
 import com.noteCup.member.model.vo.MemberView;
-import com.noteCup.search.service.SearchService;
+import com.noteCup.search.service.SearchMM;
 
 @RequestMapping(value = "/search")
 @Controller
@@ -19,7 +19,7 @@ import com.noteCup.search.service.SearchService;
 public class SearchController {
 
 	@Autowired
-	SearchService SearchService;
+	SearchMM sm;
 	
 	@GetMapping("")
 	public String MemberList() {		
@@ -29,7 +29,7 @@ public class SearchController {
 	
 	@GetMapping("/member")
 	public String searchMember(@RequestParam(value = "member") String member, Model model) {
-		//List<MemberView> mSearch = SearchService.searchMember(member);
+		List<MemberView> mSearch = sm.searchMember(member);
 		System.out.println(member);
 		return "memberSearch";
 	}  

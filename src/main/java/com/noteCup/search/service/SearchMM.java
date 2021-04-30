@@ -9,17 +9,24 @@ import org.springframework.stereotype.Service;
 
 import com.noteCup.member.model.domain.MemberInfo;
 import com.noteCup.member.model.vo.MemberView;
+import com.noteCup.member.repository.IMemberRepository;
 import com.noteCup.reply.repository.IReplyRepository;
 
 @Service
-public class SearchService {
+public class SearchMM {
 
-	/*
-	 * @Autowired IMemberRepository IMemberRepository;
-	 * 
-	 * @Transactional public List<MemberView> searchMember(String member) {
-	 * List<MemberInfo> mInfo = return mSearch; }
-	 */
+	
+	  @Autowired 
+	  IMemberRepository memberRepository;
+	  
+	  @Transactional 
+	  public List<MemberView> searchMember(String member) {
+	 
+		//List<MemberInfo> mInfo =
+			  
+		return null;
+	  }
+	 
 
 	
 
