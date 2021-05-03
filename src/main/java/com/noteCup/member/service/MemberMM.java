@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.noteCup.contents.constant.ResultCode;
+import com.noteCup.member.constant.ResultCode;
 import com.noteCup.member.exception.UserAlreadyExistException;
 import com.noteCup.member.model.domain.MemberInfo;
 import com.noteCup.member.model.domain.VerificationToken;

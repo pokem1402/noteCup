@@ -1,4 +1,4 @@
-package com.noteCup.contents.constant;
+package com.noteCup.member.constant;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;

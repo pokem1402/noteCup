@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.noteCup.contents.constant.ResultCode;
 import com.noteCup.contents.model.vo.ResponseMessage;
+import com.noteCup.member.constant.ResultCode;
 import com.noteCup.member.service.MemberMM;
 
 @RestController
