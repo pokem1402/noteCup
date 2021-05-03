@@ -24,7 +24,7 @@ import com.noteCup.member.model.dto.MemberInput;
 @AutoConfigureMockMvc
 @SpringBootTest
 @Transactional
-class GuestRestControllerRest {
+class GuestRestControllerTest {
 
 	@Autowired
 	private MockMvc mockMvc;
