@@ -31,11 +31,11 @@ public class SearchController {
 	 * daniel
 	 * 2021. 4. 30.
 	 */
-	@GetMapping("")
+	/*@GetMapping("")
 	public String MemberList() {
 		
 		return "search";
-	}
+	}*/
 	
 	@GetMapping("/member")
 	public String searchMember(@RequestParam(value = "member") String member, Model model) {
