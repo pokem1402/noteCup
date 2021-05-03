@@ -78,7 +78,7 @@ public class ReplyRestController {
 	
 
 	@PostMapping("/{pid}/{cid}/reply/view") //pid = 개인 url cid ="콘텐츠번호"
-	public String getReplyBycid(@PathVariable String pid, @PathVariable String cid, WebRequest request, Model model, HttpSession ss) {
+	public String getReplyByCid(@PathVariable String pid, @PathVariable String cid, WebRequest request, Model model, HttpSession ss) {
 		List <Reply> replyList = rm.getReplyByCid(Long.parseLong(cid));
 		objectMapper = new ObjectMapper();
 		String json = null;
@@ -92,19 +92,19 @@ public class ReplyRestController {
 	}
 	
 	@PostMapping("/rest/edit")//댓글 삽입하고 나서 .... String "reply/rest/view" + cid 로 넘겨주면 됨?...
-	public String insert(@ModelAttribute("reply") ReplyInput replyInput,Principal principal) {
+	public String insert(@ModelAttribute("reply") ReplyInput replyInput, Principal principal) {
 		rm.create(replyInput, principal.getName());
-		return "/" + 1 + "/" + replyInput.getCid()+ "/reply/view";
+		return "/" + 1 + "/" + replyInput.getCid()+ "/reply/view"; //1=개인 URL , replyInput.getCide = 컨텐츠넘버
 	}
 	
 	@PatchMapping("/rest/edit")//자원 부분 교체
-	public String update(@ModelAttribute("reply") ReplyInput replyInput,Principal principal) {
+	public String update(@ModelAttribute("reply") ReplyInput replyInput, Principal principal) {
 		rm.update(replyInput, principal.getName());
 		return "/" + 1 + "/" + replyInput.getCid()+ "/reply/view";
 	}
 	
 	@DeleteMapping("/rest/edit")
-	public String delete(@ModelAttribute("reply") ReplyInput replyInput,Principal principal) {
+	public String delete(@ModelAttribute("reply") ReplyInput replyInput, Principal principal) {
 		rm.delete(replyInput, principal.getName());
 		return "/" + 1 + "/" + replyInput.getCid()+ "/reply/view";
 	}

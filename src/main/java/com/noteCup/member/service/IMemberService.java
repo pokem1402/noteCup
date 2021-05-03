@@ -2,7 +2,7 @@ package com.noteCup.member.service;
 
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.noteCup.contents.constant.ResultCode;
+import com.noteCup.member.constant.ResultCode;
 import com.noteCup.member.exception.UserAlreadyExistException;
 import com.noteCup.member.model.domain.MemberInfo;
 import com.noteCup.member.model.domain.VerificationToken;

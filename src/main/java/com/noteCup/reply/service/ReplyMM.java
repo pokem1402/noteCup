@@ -27,7 +27,7 @@ import com.noteCup.reply.repository.IReplyRepository;
  * --------------------------------------
  * @author	: daniel
  * @created	: 2021. 4. 29.
- * @version	: 1.0.1
+ * @version	: 1.
  * @formatter:on
  */
 @Service

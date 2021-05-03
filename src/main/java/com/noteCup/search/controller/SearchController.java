@@ -30,15 +30,12 @@ public class SearchController {
 	 * daniel
 	 * 2021. 4. 30.
 	 */
-<<<<<<< HEAD
-	/*@GetMapping("")
-=======
+
 	@GetMapping("/")
->>>>>>> c603112fa7a1394f99a08ff2be90169f901ad9fd
 	public String MemberList() {
 		
 		return "search";
-	}*/
+	}
 	
 	@GetMapping("/member")
 	public String searchMember(@RequestParam(value = "member") String member, Model model) {
