@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -39,8 +40,8 @@ import lombok.extern.log4j.Log4j2;
  * @version	: 1.0
  * @formatter:on
  */
+//@RequestMapping(value = "/reply")
 @Log4j2
-@RequestMapping(value = "/reply")
 @RestController
 public class ReplyRestController {
 	
@@ -51,9 +52,9 @@ public class ReplyRestController {
 	@Autowired
 	ReplyMM rm;
 
-	@GetMapping("/rest/view")
-	public String getReplyBycid(WebRequest request, Model model, HttpSession ss) {
-		List <Reply> replyList = rm.getReplyByCid(Long.parseLong(request.getParameter("cid")));
+	@PostMapping("/{pid}/{cid}/reply/view") //pid = 개인 url
+	public String getReplyBycid(@PathVariable String pid, @PathVariable String cid, WebRequest request, Model model, HttpSession ss) {
+		List <Reply> replyList = rm.getReplyByCid(Long.parseLong(cid));
 		objectMapper = new ObjectMapper();
 		String json = null;
 		try {
