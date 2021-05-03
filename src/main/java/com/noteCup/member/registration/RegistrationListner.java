@@ -59,11 +59,11 @@ public class RegistrationListner implements ApplicationListener<OnRegistrationCo
 		memberService.createVerificationToken(user, token);
 		
 		String recipientAddress = user.getEmail();
-		String subject = messages.getMessage("registration.confirm.subject", null, Locale.ENGLISH);
+		String subject = messages.getMessage("registration.confirm.subject", null, event.getLocale());
 
 		String confirmUrl = event.getAppUrl() + "/registration/Confirm?token=" + token;
 		
-		String message = messages.getMessage("auth.message.regSucc", null, Locale.ENGLISH);
+		String message = messages.getMessage("auth.message.regSucc", null, event.getLocale());
 		
 		System.out.println(subject);
 		System.out.println(message);

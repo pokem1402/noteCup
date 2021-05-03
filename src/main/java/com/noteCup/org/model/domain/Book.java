@@ -74,7 +74,7 @@ public class Book {
 	@Basic(optional = false)
 	@ManyToOne(targetEntity = MemberInfo.class,
 			fetch=FetchType.LAZY)
-	@JoinColumn(name = "mid", updatable = false)
+	@JoinColumn(name = "mid", updatable = false, nullable = false)
 	private MemberInfo member;
 	
 }

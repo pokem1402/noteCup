@@ -15,7 +15,9 @@ public interface IMemberRepository extends JpaRepository<MemberInfo, Long> {
 	int countByEmail(String email);
 	int countByNickname(String nickname);
 	int countByMid(String id);
+	int countByUrl(String url);
 	
 	MemberInfo findByNickname(String nickname);//by simok
 	MemberInfo findByMid(Long mid);
+
 }

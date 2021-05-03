@@ -17,6 +17,7 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import com.noteCup.member.model.domain.MemberInfo;
 import com.noteCup.org.model.domain.Book;
@@ -62,7 +63,7 @@ public class ContentWrapper {
 	@Setter
 	@Basic(optional = false)
 	@ManyToOne(targetEntity=MemberInfo.class, fetch=FetchType.LAZY)
-	@JoinColumn(name="mid", updatable = false)
+	@JoinColumn(name="mid", updatable = false, nullable = false)
 	private MemberInfo memberInfo;
 
 	@Setter
@@ -82,13 +83,13 @@ public class ContentWrapper {
 	private long like;
 	
 	@Basic(optional = false)
-	@Column(name = "cDateCreated", insertable = false, updatable = false)
+	@Column(name = "cDateCreated", updatable = false)
 	@CreationTimestamp
 	private Date created;
 	
 	@Basic(optional = false)
-	@Column(name = "cDateUpdated", insertable = false)
-	@CreationTimestamp
+	@Column(name = "cDateUpdated")
+	@UpdateTimestamp
 	private Date updated;
 	
 	@Basic(optional = false)

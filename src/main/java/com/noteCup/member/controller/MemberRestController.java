@@ -4,6 +4,7 @@ import java.security.Principal;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,7 +29,7 @@ import lombok.extern.log4j.Log4j2;
  */
 @Log4j2
 @RestController 
-@RequestMapping("/member/rest")
+@RequestMapping("/api/member")
 public class MemberRestController {
 
 	
@@ -36,7 +37,6 @@ public class MemberRestController {
 	public ResponseEntity<?> getName(Principal principal){
 		
 		String [] tokens = principal.toString().split(",");
-		
 		
 		String nickname  = null;
 		MemberInput temp = new MemberInput();
@@ -55,5 +55,5 @@ public class MemberRestController {
 		return new ResponseEntity<>(nickname, HttpStatus.OK);
 		
 	}
-
+	
 }

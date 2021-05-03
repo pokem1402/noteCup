@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Locale;
 import java.util.Set;
 
+import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.ColumnDefault;
@@ -23,6 +25,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -48,6 +51,8 @@ import lombok.experimental.Accessors;
 @Data
 @Accessors(chain=true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Builder
+@AllArgsConstructor
 public class MemberInfo implements UserDetails {
 
 	/**
@@ -57,20 +62,29 @@ public class MemberInfo implements UserDetails {
 	 */
 	private static final long serialVersionUID = -4582951860454296082L;
 
-	@Id
+	@Id 
 	@Column(name = "mid")
+	@Basic(optional = false)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long mid;
+	
+	@Column(name = "url", unique = true)
+	@Basic(optional = false)
+	@Size(min = 4)
+	private String url;
 
 	@Column(name = "mpwd")
+	@Basic(optional = false)
 	private String pwd;
 
 	@Column(name = "memail", unique = true)
 	@Size(max = 120)
+	@Basic(optional = false)
 	private String email;
 
 	@Column(name = "mnickname")
 	@Size(max = 20)
+	@Basic(optional = false)
 	private String nickname;
 
 	@Column(name = "auth")
@@ -89,11 +103,12 @@ public class MemberInfo implements UserDetails {
 	@Transient
 	private boolean credentialsNonExpired;
 
-//	@Column(name = "enabled")
 	@Transient
 	private boolean enabled;
 	
-	private Locale locale = Locale.KOREAN;
+	@Column
+	@Size(max = 40)
+	private String locale = Locale.KOREAN.getLanguage();
 	
 	@Builder
 	//@formatter:off
@@ -103,6 +118,7 @@ public class MemberInfo implements UserDetails {
 					  String nickname,
 					  String auth,
 					  String introduction,
+					  String url,
 					  boolean accountNonExpired,
 					  boolean accountNonLocked,
 					  boolean credentialsNonExpired,
@@ -113,6 +129,7 @@ public class MemberInfo implements UserDetails {
 		this.email = email;
 		this.nickname = nickname;
 		this.auth = auth;
+		this.url = url;
 		this.introduction = introduction;
 		this.accountNonExpired = accountNonExpired;
 		this.accountNonLocked = accountNonLocked;
@@ -132,6 +149,11 @@ public class MemberInfo implements UserDetails {
 	@OneToOne(cascade=CascadeType.PERSIST, mappedBy="memberInfo")
 	private VerificationToken verficationToken;
 	
+	public void setLocale(Locale locale) {
+		
+		this.locale = locale.getLanguage();
+	}
+		
 	@Override
 	public String getUsername() { // id
 		return this.email;
@@ -141,6 +163,4 @@ public class MemberInfo implements UserDetails {
 	public String getPassword() { // password
 		return this.pwd;
 	}
-
-
 }

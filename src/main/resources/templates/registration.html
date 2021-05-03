@@ -24,6 +24,10 @@
             <input type="password" th:field="*{matchingPassword}" />
         </div>
         <div>
+            <label th:text="#{label.user.url}">url</label>
+            <input type="text" th:field="*{url}" />
+        </div>
+        <div>
             <label th:text="#{label.user.nickname}">닉네임</label>
             <input type="text" th:field="*{nickname}" />
         </div>

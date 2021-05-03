@@ -44,7 +44,7 @@ public class ContentLink {
 	private long cid;
 
 	@Basic(optional = false)
-	@Column(name = "title")
+	@Column(name = "ctitle")
 	@Size(max = 120)
 	private String ctitle;
 	
