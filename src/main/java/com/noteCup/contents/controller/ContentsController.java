@@ -9,11 +9,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,7 +29,7 @@ import com.noteCup.contents.service.ContentsMM;
 import lombok.extern.log4j.Log4j2;
 
 @Log4j2
-@RequestMapping(value = "/content")
+@RequestMapping(value = "{mURL}")
 @Controller
 public class ContentsController {
 	ModelAndView mav;
@@ -35,37 +37,36 @@ public class ContentsController {
 	@Autowired
 	ContentsMM cm;
 
-	@GetMapping("/edit/write")
-	public String createFrm(WebRequest request, Model model, HttpSession ss) {
-		// if(ss.getAttribute("id")==null) return "redirect:/";
-		// ContentsInput ci = new ContentsInput();
+	@GetMapping("/content/edit/write")
+	public String createFrm(@PathVariable String mURL, WebRequest request, Model model, HttpSession ss) {
 		ContentInput contentFrm = new ContentInput();
-		// model.addAttribute("content", ci);
 		model.addAttribute("content", contentFrm);
+//		model.addAttribute("action", "/")
 		return "writeContent";
 	}
 
-	@PostMapping("/edit/write")
-	public String createPost(@ModelAttribute("content") ContentInput content, HttpServletRequest request, Errors errors,
-			Principal principal) {
+	@PostMapping("/content/edit/write")
+	public String createPost(@PathVariable String mURL, @ModelAttribute("content") ContentInput content,
+			HttpServletRequest request, Errors errors, Principal principal, Authentication auth) {
 
 		System.out.println(principal.getName());
+		System.out.println(mURL);
 
 		cm.create(content, principal.getName());
 
 		return "index";
 	}
 
-	@GetMapping("/view/item")
-	public String contentFrm(WebRequest request, Model model, HttpSession ss) {
+	@GetMapping("/{cid}")
+	public String contentFrm(@PathVariable String cid, WebRequest request, Model model, HttpSession ss) {
 		Map<Object, Object> hm = new HashMap<Object, Object>();
-		hm.put("cid", request.getParameter("cid"));
+		hm.put("cid", cid);
 		hm.put("ctype", request.getParameter("ctype"));
 		model.addAttribute("contentHtml", cm.read(hm));
 		return "contentFrm";
 	}
 
-	@PostMapping("/edit/delete")
+	@PostMapping("/content/edit/delete")
 	public String delete(WebRequest request, Model model, HttpSession ss) {
 		cm.delete(request.getParameter("cid"));
 		return "redirect:/";

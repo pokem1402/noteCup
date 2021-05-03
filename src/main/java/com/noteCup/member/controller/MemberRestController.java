@@ -4,6 +4,7 @@ import java.security.Principal;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -37,7 +38,6 @@ public class MemberRestController {
 		
 		String [] tokens = principal.toString().split(",");
 		
-		
 		String nickname  = null;
 		MemberInput temp = new MemberInput();
 		
@@ -55,5 +55,5 @@ public class MemberRestController {
 		return new ResponseEntity<>(nickname, HttpStatus.OK);
 		
 	}
-
+	
 }

@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.RequestBuilder;
 
@@ -36,21 +37,23 @@ class GuestRestControllerRest {
 	 * @formatter:on
 	 */
 	@BeforeEach
-	void mockRegistration() throws Exception{
+	void TestCaseRegistration() throws Exception{
+		
 		// @formatter:off
 		MemberInput member = MemberInput.builder()
-							  .email("exist@email.com")
+							  .email("testAccount@email.com")
 							  .introduction("자기소개")
-							  .nickname("존재")
+							  .nickname("테스트 닉네임")
 							  .password("1234")
 							  .matchingPassword("1234")
-							  .url("exist")
+							  .url("testAccount")
 							  .build();
 		mockMvc.perform(post("/registration")			
-						.flashAttr("user", member)
-						.with(csrf()))
+				.flashAttr("user", member)
+				.with(csrf()))
 				.andExpect(redirectedUrl("/"));
-		// @formatter:on
+		//@formatter:on				
+		
 	}
 	
 	/** @formatter:off
@@ -84,4 +87,17 @@ class GuestRestControllerRest {
 		// @formatter:on
 	}
 
+	/**
+	 * 로그인 상태에서 기능을 테스트 하는 방법
+	 * @throws Exception
+	 */
+	@Test
+	@WithMockUser(username="testAccount@email.com", password="1234")
+	void detailTest() throws Exception{
+		mockMvc.perform(post("/api/member/test")
+				.with(csrf())
+				)
+				.andDo(print());
+
+	}
 }
