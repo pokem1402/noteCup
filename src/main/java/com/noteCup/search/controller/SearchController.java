@@ -19,7 +19,6 @@ import com.noteCup.search.service.SearchMM;
 
 @RequestMapping(value = "/search")
 @Controller
-
 public class SearchController {
 
 	@Autowired
@@ -31,7 +30,7 @@ public class SearchController {
 	 * daniel
 	 * 2021. 4. 30.
 	 */
-	@GetMapping("")
+	@GetMapping("/")
 	public String MemberList() {
 		
 		return "search";

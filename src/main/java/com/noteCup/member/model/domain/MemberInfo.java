@@ -23,6 +23,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -48,6 +49,8 @@ import lombok.experimental.Accessors;
 @Data
 @Accessors(chain=true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Builder
+@AllArgsConstructor
 public class MemberInfo implements UserDetails {
 
 	/**
@@ -57,10 +60,14 @@ public class MemberInfo implements UserDetails {
 	 */
 	private static final long serialVersionUID = -4582951860454296082L;
 
-	@Id
+	@Id 
 	@Column(name = "mid")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long mid;
+	
+	@Column(name = "url", unique = true)
+	@Size(min = 4)
+	private String url;
 
 	@Column(name = "mpwd")
 	private String pwd;
@@ -89,10 +96,10 @@ public class MemberInfo implements UserDetails {
 	@Transient
 	private boolean credentialsNonExpired;
 
-//	@Column(name = "enabled")
 	@Transient
 	private boolean enabled;
 	
+	@Column
 	private Locale locale = Locale.KOREAN;
 	
 	@Builder
@@ -103,6 +110,7 @@ public class MemberInfo implements UserDetails {
 					  String nickname,
 					  String auth,
 					  String introduction,
+					  String url,
 					  boolean accountNonExpired,
 					  boolean accountNonLocked,
 					  boolean credentialsNonExpired,
@@ -113,6 +121,7 @@ public class MemberInfo implements UserDetails {
 		this.email = email;
 		this.nickname = nickname;
 		this.auth = auth;
+		this.url = url;
 		this.introduction = introduction;
 		this.accountNonExpired = accountNonExpired;
 		this.accountNonLocked = accountNonLocked;

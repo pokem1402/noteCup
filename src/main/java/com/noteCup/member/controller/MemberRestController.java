@@ -28,7 +28,7 @@ import lombok.extern.log4j.Log4j2;
  */
 @Log4j2
 @RestController 
-@RequestMapping("/member/rest")
+@RequestMapping("/api/member")
 public class MemberRestController {
 
 	

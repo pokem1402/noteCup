@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.noteCup.contents.constant.ResultCode;
 import com.noteCup.member.exception.UserAlreadyExistException;
 import com.noteCup.member.model.domain.MemberInfo;
 import com.noteCup.member.model.domain.VerificationToken;
@@ -78,7 +79,7 @@ public class MemberMM implements UserDetailsService, IMemberService{
 	@Override
 	public UserDetails registerNewUserAccount(final MemberInput userform) throws UserAlreadyExistException {
 				
-		if(checkEmailExist(userform.getEmail())) {
+		if(checkEmailExist(userform.getEmail()).equals(ResultCode.DUPLICATE)) {
 			throw new UserAlreadyExistException("There is an account with that email address: " + userform.getEmail());
 		}
 		MemberInfo user = userform.toEntity();
@@ -87,9 +88,19 @@ public class MemberMM implements UserDetailsService, IMemberService{
 	}
 	
 	@Override
-	public boolean checkEmailExist(final String email) {
-		return memberRepository.countByEmail(email) > 0;
+	public ResultCode checkEmailExist(final String email) {
+		
+		return ResultCode.getDupByBool(memberRepository.countByEmail(email) > 0);
 	}
+	
+	
+	@Override
+	public ResultCode checkUrlExist(final String url) {
+		
+		return ResultCode.getDupByBool(memberRepository.countByUrl(url) > 0);
+	
+	}
+	
 	
 	public boolean update(MemberInput mi) {
 
@@ -170,6 +181,7 @@ public class MemberMM implements UserDetailsService, IMemberService{
 		tokenRepository.deleteById(mid);
 		
 	}
-	
+
+
 
 }
