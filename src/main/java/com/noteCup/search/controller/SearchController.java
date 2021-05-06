@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.noteCup.member.model.domain.MemberInfo;
 import com.noteCup.member.model.vo.MemberView;
 import com.noteCup.search.service.SearchMM;
@@ -52,14 +53,16 @@ public class SearchController {
 	 * daniel
 	 * 2021. 4. 30.
 	 * searchSomething
+	 * @throws JsonProcessingException 
 	 */
 	@GetMapping("")
-	public ModelAndView searchSomething(WebRequest req) {		
+	public String searchSomething(WebRequest req) throws JsonProcessingException {		
 		Map<String, String> hm = new HashMap<String,String>();
 		hm.put("type", req.getParameter("type"));
 		hm.put("query", req.getParameter("query"));
-		ModelAndView mav = sm.searchSomething(hm);
-		return mav;
+		//ModelAndView mav = 
+		return sm.searchSomething(hm);
+		//return mav;
 	}
 	
 }

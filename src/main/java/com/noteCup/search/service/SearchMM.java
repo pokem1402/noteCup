@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.noteCup.contents.constant.ContentType;
 import com.noteCup.contents.model.domain.ContentPost;
 import com.noteCup.contents.model.domain.ContentScript;
@@ -54,30 +56,36 @@ public class SearchMM {
 	 * daniel
 	 * 2021. 4. 30.
 	 * searchSomething
+	 * @throws JsonProcessingException 
 	 */
-	public ModelAndView searchSomething(Map<String, String> hm) {
+	public String searchSomething(Map<String, String> hm) throws JsonProcessingException {
 		String query = hm.get("query");
-		mav = new ModelAndView();
+		String result = "";
+		//mav = new ModelAndView();
+		ObjectMapper objectMapper = new ObjectMapper();
+		
 		switch (ContentType.findType(hm.get("type"))) { 
 
 		case POST:
 			// @formatter:off
 		    List<ContentPost> contentPostList = 
 		    postRepository.findByCtitleContainingIgnoreCaseOrCtextContainingIgnoreCase(query, query);
-		    mav.addObject("searchList",  makeHtmlPostList(contentPostList));
-		    mav.setViewName("searchResult");
+		    result = objectMapper.writeValueAsString(contentPostList);
+		    /*mav.addObject("searchList",  makeHtmlPostList(contentPostList));
+		    mav.setViewName("searchResult");*/
 			break;
 			// @formatter:on
 		case SCRIPT:
 			// @formatter:off
 			List<ContentScript> contentScriptList = 
-			scriptRepository.findByCtextContainingIgnoreCase(query);			
-			mav.addObject("searchList",  makeHtmlScriptList(contentScriptList));
-		    mav.setViewName("searchResult");
+			scriptRepository.findByCtextContainingIgnoreCase(query);
+			result = objectMapper.writeValueAsString(contentScriptList);
+			/*mav.addObject("searchList",  makeHtmlScriptList(contentScriptList));
+		    mav.setViewName("searchResult");*/
 			break;
 			// @formatter:on
 		}
-		return mav;
+		return result;
 		/* 이부분은 지워도 될듯
 		 * if(query.contains(" ")) { String[] queries = query.split(" "); switch
 		 * (ContentType.findType(hm.get("type"))) { //queries 다중검색?..
